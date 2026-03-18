@@ -1,22 +1,31 @@
 # Coonsheet
 
+# Coonsheet
+
 > Book of Technical Spell
 
-Coonsheet is a collection of focused, practical cheat sheets and notes written in Markdown. Each topic lives in its own `.md` file so you can quickly find and reuse technical recipes, commands, and examples.
+Coonsheet is a personal collection of compact, practical cheat sheets and reference notes written in Markdown. It is an informational repository maintained by Imam Nc (Kacoon) for personal use and public reference — not a documentation framework or tooling project. You're welcome to read, copy, and reuse the content for your own purposes.
 
-**Features**
+**Quick Facts**
 
-- **Modular**: One topic = one Markdown file for easy organization.
-- **Portable**: Markdown-first so files work anywhere (editors, GitHub).
-- **Searchable**: Structure your notes for quick lookup.
+- **Purpose**: Personal reference and public sharing of short technical recipes.
+- **Scope**: Individual `.md` files with focused examples, commands, and notes.
+- **Not a framework**: This repo does not provide tooling, generators, or a publishing system — only Markdown content.
 
-**Getting Started**
+**How to Use**
 
-1. Clone this repository to your local machine.
-2. Add new cheat sheets in the `cheats/` folder (create it if needed).
-3. Follow the cheat-sheet template below for consistency.
+1. Clone the repository.
+2. Browse the `cheats/` folder (create it if it doesn't exist) or open files directly on GitHub.
+3. Copy, adapt, and reuse any content as needed.
 
-**Recommended File Template**
+**Contributing (optional)**
+
+- Suggestions and improvements are welcome via pull requests.
+- If you add a sheet, please include a short title, a one-line summary, and optional tags at the top of the file.
+
+**Suggested File Template**
+
+Use a short frontmatter block (optional) followed by concise sections:
 
 ```markdown
 ---
@@ -32,33 +41,33 @@ One-line summary.
 
 ## Quick Commands
 
-- Command: example
+- command: example
 
 ## Notes
 
-Concise, practical tips and examples.
+Short explanations and examples.
 ```
 
-**Suggested Project Structure**
+**Project Layout (suggested)**
 
 - `cheats/` — individual cheat-sheet `.md` files
-- `assets/` — images and attachments used by sheets
-- `README.md` — project overview and contribution guide
-
-**Contributing**
-
-- Create a new Markdown file under `cheats/`.
-- Use the recommended template at the top of the file.
-- Open a PR with a short description and tags.
+- `assets/` — images or attachments used by sheets
+- `README.md` — this overview
 
 **Repository**
 
-This project is intended for hosting on GitHub. Suggested repo name: `coonsheet`.
+Recommended GitHub repo name: `coonsheet`.
 
 **Author**
 
 Imam Nc (Kacoon)
 
 **License**
+
+If you want the content to be explicitly reusable without restriction, consider `CC0` (public domain) or `MIT` for permissive terms. Add a `LICENSE` file with your chosen license.
+
+---
+
+If you'd like, I can add an example cheat sheet under `cheats/`, create a `LICENSE` file (CC0 or MIT), or update wording further — tell me which option you'd like next.
 
 Suggested: MIT — add a `LICENSE` file if you agree.
