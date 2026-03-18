@@ -1,4 +1,4 @@
-# 🚀 Production VPS Setup — Single Node Docker & GitLab Runner
+# 🚀 Production VPS Setup — Single Docker & GitLab Runner
 
 > A step-by-step guide to harden and configure a production VPS with containerization, CI/CD, and security tools.
 
@@ -12,10 +12,11 @@
 
 1. [� SSH Configuration](#1-generate-ssh-key-optional)
 2. [🔥 UFW Firewall](#2-ufw-uncomplicated-firewall)
-3. [🛡️ fail2ban Protection](#3-setup-fail2ban-protection)
-4. [🐳 Docker Setup](#4-setup-docker-for-single-node-containerization)
-5. [🔄 GitLab Runner](#5-setup-gitlab-runner-for-ci-cd-pipelines)
-6. [📋 Quick Reference](#quick-reference-checklist)
+3. [🛡️ fail2ban Protection](#3-fail2ban--basic-setup)
+4. [💾 Swap Setup](#4-setup-swap-for-memory-management)
+5. [🐳 Docker Setup](#5-setup-docker)
+6. [🔄 GitLab Runner](#6-setup-gitlab-runner)
+7. [📋 Quick Reference](#quick-reference-checklist)
 
 ---
 
@@ -128,7 +129,69 @@ sudo fail2ban-client status sshd
 
 ---
 
-## 4) Setup Docker for Single-Node Containerization
+## 4) Setup Swap for Memory Management
+
+💾 Configure swap space to prevent out-of-memory issues and improve system stability.
+
+**What this does:**
+
+- Creates a swap file for virtual memory when RAM is insufficient
+- Enables swap persistence across reboots
+- Provides better memory management for containerized workloads
+
+**Check current swap status:**
+
+```bash
+# check existing swap
+swapon --show
+
+# check memory and swap usage
+free -h
+```
+
+**Create and configure swap (4GB example):**
+
+```bash
+# create 4GB swap file (adjust size as needed)
+sudo fallocate -l 4G /swapfile
+
+# set correct permissions (only root can read/write)
+sudo chmod 600 /swapfile
+
+# format the file as swap
+sudo mkswap /swapfile
+
+# activate swap immediately
+sudo swapon /swapfile
+
+# verify swap is active
+swapon --show
+free -h
+```
+
+**Make swap persistent across reboots:**
+
+```bash
+# edit fstab to add swap entry
+sudo nano /etc/fstab
+
+# add this line at the end:
+/swapfile none swap sw 0 0
+
+# save and exit (Ctrl+X, Y, Enter)
+```
+
+**📌 Notes:**
+
+- **Swap size guidelines:** 1-2x RAM for systems with <8GB RAM, or 4GB minimum for container workloads
+- Use `fallocate` for faster creation on modern filesystems (vs `dd`)
+- Swap is slower than RAM but prevents OOM (Out of Memory) kills
+- Monitor swap usage with `free -h` or `vmstat 1`
+- **⚠️ Performance:** Excessive swap usage indicates memory pressure; consider upgrading RAM first
+
+---
+
+## 5) Setup Docker for Single-Node Containerization
 
 🐳 Install and verify Docker Engine with secure GPG key validation. All commands are for Debian/Ubuntu.
 
@@ -170,7 +233,7 @@ newgrp docker
 
 ---
 
-## 5) Setup GitLab Runner for CI/CD Pipelines
+## 6) Setup GitLab Runner for CI/CD Pipelines
 
 🔄 Deploy a GitLab Runner to execute CI/CD pipelines on this VPS.
 
@@ -212,6 +275,10 @@ Use this checklist to verify your VPS is properly hardened:
 ✅ fail2ban service running
    - Command: sudo systemctl status fail2ban
    - Monitor bans: sudo fail2ban-client status sshd
+
+✅ Swap configured and active
+   - Command: swapon --show && free -h
+   - Verify: /swapfile entry in /etc/fstab
 
 ✅ Docker installed and verified
    - Command: docker --version
