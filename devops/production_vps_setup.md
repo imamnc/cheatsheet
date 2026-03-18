@@ -17,6 +17,8 @@
 5. [🔄 GitLab Runner](#5-setup-gitlab-runner)
 6. [📋 Quick Reference](#quick-reference-checklist)
 
+---
+
 ## 1) Generate SSH Key (optional)
 
 🔑 Create a secure SSH key pair for passwordless authentication to your VPS.
@@ -40,6 +42,8 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@your.vps.ip.address
 - Use a descriptive `-C` comment to identify the key.
 - After adding the public key to `~/.ssh/authorized_keys` on the VPS, you can SSH in without a password.
 - **⚠️ Security:** Keep your private key (`~/.ssh/id_rsa`) secure and never share it. Use `ssh-agent` for key management in production.
+
+---
 
 ## 2) UFW (Uncomplicated Firewall)
 
@@ -82,6 +86,8 @@ sudo ufw status verbose
 - If you change the SSH port, update both `ufw` rules and any `fail2ban` config.
 - **⚠️ Warning:** Always allow SSH before enabling UFW, or you'll lock yourself out. Check `sudo ufw status numbered` before `ufw enable`.
 
+---
+
 ## 3) fail2ban — basic setup
 
 🛡️ Deploy an intrusion-prevention system that monitors logs and bans repeat offenders.
@@ -119,6 +125,8 @@ sudo fail2ban-client status sshd
 - Use `fail2ban-client set sshd unbanip <IP>` to manually unban an impacted address.
 - Monitor `/var/log/fail2ban.log` and `/var/log/auth.log` for blocked IPs and intrusion attempts.
 - Adjust `maxretry` and `bantime` based on your environment; stricter settings = fewer false positives but harder legitimate access.
+
+---
 
 ## 4) Setup Docker
 
@@ -159,6 +167,8 @@ newgrp docker
 - `systemctl status docker` shows service state; use `sudo journalctl -u docker -f` to tail logs.
 - After adding the user to `docker` group, either log out and back in, or run `newgrp docker` in the shell to apply.
 - **⚠️ Security:** Users in the `docker` group have elevated privileges equivalent to `sudo`; restrict membership.
+
+---
 
 ## 5) Setup GitLab Runner
 
