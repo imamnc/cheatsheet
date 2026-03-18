@@ -1,9 +1,3 @@
----
-title: "Production VPS Setup — Docker + GitLab Runner"
-author: "Imam Nc (Kacoon)"
-created: 2026-03-18
----
-
 # 🚀 Production VPS Setup — Docker & GitLab Runner
 
 > A step-by-step guide to harden and configure a production VPS with containerization, CI/CD, and security tools.
