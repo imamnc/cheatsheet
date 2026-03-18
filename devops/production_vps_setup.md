@@ -84,4 +84,69 @@ Notes:
 - Run GitLab Runner with least privileges and monitor runner logs.
 - Consider firewall rules (ufw/iptables) to restrict access to needed ports only.
 
+## 4) UFW (Uncomplicated Firewall)
+
+Example UFW setup to allow SSH, HTTP, and HTTPS and enable basic rate limiting for SSH:
+
+```bash
+# install ufw if missing
+sudo apt install -y ufw
+
+# allow OpenSSH (replace with custom port if you changed it)
+sudo ufw allow OpenSSH
+
+# or to allow a custom port, e.g. 2222:
+# sudo ufw allow 2222/tcp
+
+# allow web traffic
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# rate-limit SSH to mitigate brute-force
+sudo ufw limit OpenSSH
+
+# enable firewall (confirm rules first)
+sudo ufw status numbered
+sudo ufw enable
+
+# check status
+sudo ufw status verbose
+```
+
+Notes:
+
+- Use `ufw status numbered` to remove rules by number (`sudo ufw delete <num>`).
+- If you change the SSH port, update both `ufw` rules and any `fail2ban` config.
+
+## 5) fail2ban — basic setup
+
+Install `fail2ban` and enable protections for SSH. This example creates a minimal jail configuration.
+
+```bash
+# install
+sudo apt install -y fail2ban
+
+# create local jail config (prevents editing packaged defaults)
+sudo tee /etc/fail2ban/jail.d/local.conf > /dev/null <<'EOF'
+[sshd]
+enabled = true
+port    = ssh
+filter  = sshd
+logpath = /var/log/auth.log
+maxretry = 5
+bantime = 3600
+EOF
+
+# restart and check status
+sudo systemctl restart fail2ban
+sudo systemctl status fail2ban
+sudo fail2ban-client status sshd
+```
+
+Tips:
+
+- `maxretry` controls how many failures before a ban; `bantime` is seconds banned.
+- Use `fail2ban-client set sshd unbanip <IP>` to manually unban an address.
+- Monitor `/var/log/fail2ban.log` and `/var/log/auth.log` for events.
+
 ---
