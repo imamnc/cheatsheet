@@ -45,7 +45,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@your.vps.ip.address
 
 ---
 
-## 2) UFW (Uncomplicated Firewall)
+## 2) Setup UFW (Uncomplicated Firewall)
 
 🔥 Configure a stateful firewall to restrict traffic and protect against common attacks.
 
@@ -88,7 +88,7 @@ sudo ufw status verbose
 
 ---
 
-## 3) fail2ban — basic setup
+## 3) Setup fail2ban Protection
 
 🛡️ Deploy an intrusion-prevention system that monitors logs and bans repeat offenders.
 
@@ -128,7 +128,7 @@ sudo fail2ban-client status sshd
 
 ---
 
-## 4) Setup Docker
+## 4) Setup Docker for Single-Node Containerization
 
 🐳 Install and verify Docker Engine with secure GPG key validation. All commands are for Debian/Ubuntu.
 
@@ -170,7 +170,7 @@ newgrp docker
 
 ---
 
-## 5) Setup GitLab Runner
+## 5) Setup GitLab Runner for CI/CD Pipelines
 
 🔄 Deploy a GitLab Runner to execute CI/CD pipelines on this VPS.
 
