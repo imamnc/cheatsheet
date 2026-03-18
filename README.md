@@ -51,40 +51,6 @@ Found a mistake? Have a useful tip? Feel free to:
 
 ---
 
-## 📝 Content Guidelines
-
-Each cheat sheet includes:
-
-- **Header** — Title, tags, and metadata
-- **Quick Summary** — One-liner explaining the purpose
-- **Commands/Examples** — Copy-paste ready code snippets
-- **Notes & Tips** — Important gotchas and best practices
-
-Example structure:
-
-```markdown
----
-title: "Guide Title"
-tags: [tag1, tag2]
-author: "Your Name"
-created: YYYY-MM-DD
----
-
-# Guide Title
-
-One-line summary.
-
-## Section 1
-
-Content here.
-
-## Notes
-
-Tips and warnings.
-```
-
----
-
 ## 📄 License
 
 Content is provided as-is for reference and reuse. Consider using:
