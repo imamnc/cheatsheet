@@ -1,4 +1,4 @@
-# 🚀 Production VPS Setup — Docker & GitLab Runner
+# 🚀 Production VPS Setup — Single Node Docker & GitLab Runner
 
 > A step-by-step guide to harden and configure a production VPS with containerization, CI/CD, and security tools.
 
@@ -12,9 +12,9 @@
 
 1. [� SSH Configuration](#1-generate-ssh-key-optional)
 2. [🔥 UFW Firewall](#2-ufw-uncomplicated-firewall)
-3. [🛡️ fail2ban Protection](#3-fail2ban--basic-setup)
-4. [🐳 Docker Setup](#4-setup-docker)
-5. [🔄 GitLab Runner](#5-setup-gitlab-runner)
+3. [🛡️ fail2ban Protection](#3-setup-fail2ban-protection)
+4. [🐳 Docker Setup](#4-setup-docker-for-single-node-containerization)
+5. [🔄 GitLab Runner](#5-setup-gitlab-runner-for-ci-cd-pipelines)
 6. [📋 Quick Reference](#quick-reference-checklist)
 
 ---
